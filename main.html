@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>meme renamer</title>
+</head>
+<style>
+	body {
+		background-color: #333;
+		color: #ddd;
+		max-width: 100ch;
+		margin: 0 auto;
+
+		#toplevel {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+		}
+
+		#image-container {}
+
+	}
+</style>
+
+<body>
+	<h1>meme renamer</h1>
+	<p>{{.}}</p>
+
+	<h3>{{.Filename}}</h3>
+	<div id="toplevel">
+		<div id="image-container">
+			<img style="max-width: 500px; max-height: 300px;" src="{{.Endpoint}}" alt="meme to be renamed">
+			<p>This is an image!</p>
+		</div>
+		<div id="form-container">
+			<form method="POST">
+				<label for="newname">choose a new filename</label>
+				<input type="text" id="newname" name="newname">
+				<input type="submit" value="rename">
+				<input type="hidden" name="oldname" value="{{.Filename}}">
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
