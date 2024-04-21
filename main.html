@@ -26,6 +26,31 @@
 </style>
 
 <body>
+	<script>
+		function handleKeyDown(event) {
+			// Check if the 'U' key is pressed
+			if (event.key === 'Escape') {
+				// Make a POST request to the server to inform about the skip decision
+				fetch('http://localhost:8080/update-json', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ skip: true })
+				})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					Refresh the page to get the new content from '/'
+					window.location.reload();
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+			}
+		}
+		</script>
 	<h1>meme renamer</h1>
 	<p>{{.}}</p>
 
