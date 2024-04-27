@@ -54,9 +54,19 @@ func main() {
 	if len(images) == 0 {
 		log.Fatal("no images in directory")
 	}
+	currentImg := "oops, no more images"
+	if len(images) > 0 {
+		currentImg, images = images[0], images[1:]
+	}
 
 	// handler for images
 	http.Handle(imgPrefix, http.StripPrefix(imgPrefix, http.FileServer(http.Dir(dir))))
+
+	http.HandleFunc("/skip", func(w http.ResponseWriter, r *http.Request) {
+		if len(images) > 0 {
+			currentImg, images = images[0], images[1:]
+		}
+	})
 
 	// start server
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -82,6 +92,11 @@ func main() {
 					log.Fatalf("failed to rename: %v", err)
 				}
 				log.Printf("successfully renamed %s to %s\n", oldname, newname)
+
+				// new image
+				if len(images) > 0 {
+					currentImg, images = images[0], images[1:]
+				}
 			} else {
 				log.Println("empty new name, skipping")
 			}
@@ -91,11 +106,6 @@ func main() {
 		tmpl, err := template.New("main").Parse(main_html)
 		if err != nil {
 			log.Fatal(err)
-		}
-
-		currentImg := "oops, no more images"
-		if len(images) > 0 {
-			currentImg, images = images[0], images[1:]
 		}
 
 		// run it
