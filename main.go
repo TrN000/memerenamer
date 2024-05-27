@@ -29,8 +29,9 @@ func isIn(s string, sl []string) bool {
 	return false
 }
 
+// returns supported file formats. utility function to use instead of a global array.
 func supportedFiletypes() []string {
-	return []string{".jpg"}
+	return []string{".jpg", ".png"}
 }
 
 func main() {
