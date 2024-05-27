@@ -24,7 +24,7 @@ things like name and description (maybe fiddle with exif data? idk).
 
 - server recognizes properly formatted image names and won't offer them for renaming.
 - skip button
-- support more file types than just jpg
+- all lowercase renames? -> command line option/ checkboxes on the site?
 - suport video formats
 
 ## misc
@@ -42,6 +42,7 @@ No one here but us chickens
   - renames files
   - shows next image after rename
 - name can be written like a sentence and get reformatted to `snake_case` without any weird chars.
+- support more file types than just jpg -> now also png!
 
 
 # Feature Creep
@@ -65,9 +66,20 @@ This project is dependency free and compiles to a standalone, placement independ
     go build
 ```
 
+or using make
+
+```{bash}
+    make
+    sudo make install
+```
+
 
 # Usage
 
 ```{bash}
+    # if not installed
     <path to binary>/memerenamer
+    # else
+    memerenamer
 ```
+
